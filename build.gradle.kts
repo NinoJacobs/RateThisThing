@@ -33,29 +33,31 @@ repositories {
 dependencies {
 	// Spring Boot Dependencies
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
+	// Spring Security
+//	implementation("org.springframework.boot:spring-boot-starter-security")
+
 	// Database
 	runtimeOnly("org.postgresql:postgresql")
-	testImplementation("org.testcontainers:postgresql")
 
 	// Lombok
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 
-	// OpenAPI Documentation
+	// Mapstruct
+	implementation("org.mapstruct:mapstruct:${Versions.MAPSTRUCT}")
+	annotationProcessor("org.mapstruct:mapstruct-processor:${Versions.MAPSTRUCT}")
+
+	// OpenAPI Documentation (optional)
 	implementation("org.openapitools:jackson-databind-nullable:${Versions.JACKSON_DATABIND_NULLABLE}")
 	implementation("jakarta.validation:jakarta.validation-api")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${Versions.SPRINGDOC_OPENAPI_MVC_UI}")
 
 	// Testing Dependencies
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.boot:spring-boot-testcontainers")
-	testImplementation("org.springframework.security:spring-security-test")
-	testImplementation("org.testcontainers:junit-jupiter")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	testImplementation("org.testcontainers:postgresql")
 }
 
 
@@ -67,7 +69,7 @@ tasks.withType<Test> {
 val openApiGenerationDir = "$buildDir/generated/openapi"
 
 val openApiSpecs = listOf(
-	OpenApiSpecDef(packageName = "test", specFile = "$rootDir/src/main/api-spec/test.yaml")
+	OpenApiSpecDef(packageName = "ratethisthing", specFile = "$rootDir/src/main/api-spec/rate-this-thing.yaml")
 )
 
 val openApiGenerateTasks = generateOpenApiSpec(openApiSpecs, openApiGenerationDir)

@@ -1,0 +1,15 @@
+INSERT INTO Comments (review_id, user_id, comment_text)
+VALUES (1, 2, 'I agree, the burgers are fantastic!'),
+       (1, 3, 'Best diner in town, no doubt!'),
+       (2, 4, 'The ambiance is just perfect.'),
+       (3, 5, 'Totally loved the twists in this film!'),
+       (3, 6, 'Couldnt take my eyes off the screen!'),
+       (4, 7, 'The cinematography was stunning!'),
+       (5, 8, 'A great journey through space.'),
+       (6, 9, 'What a tragic ending!'),
+       (7, 10, 'Classic for a reason!'),
+       (8, 11, 'Everyone should read this book at least once.'),
+       (9, 12, 'Fitzgerald captures a lot in just a few pages.'),
+       (10, 13, 'So relevant even today.'),
+       (11, 14, 'An unforgettable tale about chasing dreams.'),
+       (12, 15, 'Perfect blend of fact and storytelling.');
