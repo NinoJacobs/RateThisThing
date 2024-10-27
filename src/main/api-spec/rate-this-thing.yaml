@@ -5,12 +5,13 @@ info:
   description: API documentation for the "Rate This Thing" application.
 
 paths:
+  # START OF USERS CONTROLLER
   /users:
     get:
       summary: Retrieve a list of users
       operationId: getUsers
       tags:
-        - User # Tag to identify this operation
+        - User
       responses:
         '200':
           description: A list of users
@@ -20,6 +21,55 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/UserDTO' # Reference the User schema
+
+  /users/{username}:
+    get:
+      summary: Retrieve a user by username
+      operationId: getUserByUsername
+      tags:
+        - User
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: The username of the user to retrieve
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A user object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserDTO'
+        '404':
+          description: User not found
+
+  /users/register:
+    post:
+      summary: Register a new user
+      operationId: registerUser
+      tags:
+        - User
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDTO'
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreated'
+        '400':
+          description: Invalid input data
+        '409':
+          description: User already exists
+
+  # END OF USERS CONTROLLER
 
 components:
   schemas:
@@ -51,3 +101,12 @@ components:
         bio:
           type: string
           example: This is a user bio.
+    UserCreated:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "User registered successfully."
+        user_id:
+          type: integer
+          example: 1
