@@ -71,6 +71,25 @@ paths:
 
   # END OF USERS CONTROLLER
 
+  # START OF CATEGORIES CONTROLLER
+  /categories:
+    get:
+      summary: Retrieve a list of categories
+      operationId: getCategories
+      tags:
+        - Category
+      responses:
+        '200':
+          description: A list of categories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryDTO' # Reference the Category schema
+
+  # END OF CATEGORIES CONTROLLER
+
 components:
   schemas:
     UserDTO:
@@ -110,3 +129,17 @@ components:
         user_id:
           type: integer
           example: 1
+
+    CategoryDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        categoryName:
+          type: string
+          enum:
+            - MOVIES
+            - BOOKS
+            - OTHER
+          example: MOVIES

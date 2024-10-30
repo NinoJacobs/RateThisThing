@@ -28,18 +28,18 @@ public class UserController implements UserApi {
         }
 
         List<UserDTO> userList = userEntities.stream()
-                .map(UserMapper.INSTANCE::userEntitytoDto)
+                .map(UserMapper.INSTANCE::userEntityToDto)
                 .toList();
 
         return ResponseEntity.ok(userList);
     }
 
     @Override
-    public ResponseEntity<UserDTO> getUserByUsername(String username){
+    public ResponseEntity<UserDTO> getUserByUsername(String username){ // rename to loginUser
         Optional<User> optionalUser = userService.getUser(username);
 
         return optionalUser
-                .map(user -> ResponseEntity.ok(UserMapper.INSTANCE.userEntitytoDto(user)))
+                .map(user -> ResponseEntity.ok(UserMapper.INSTANCE.userEntityToDto(user)))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
