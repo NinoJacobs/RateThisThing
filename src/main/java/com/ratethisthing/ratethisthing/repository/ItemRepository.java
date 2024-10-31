@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @EntityGraph(value = "Item.category", type = EntityGraph.EntityGraphType.LOAD)
+    @NonNull
     Optional<Item> findById(@NonNull Long id);
 }
