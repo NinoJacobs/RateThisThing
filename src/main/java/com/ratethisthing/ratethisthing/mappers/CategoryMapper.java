@@ -12,7 +12,7 @@ public interface CategoryMapper {
 
     CategoryDTO categoryEntityToDto(Category category);
 
-    Category categoryDtoToEntity(CategoryDTO categoryDTO);
+//    Category categoryDtoToEntity(CategoryDTO categoryDTO);
 }
 
 

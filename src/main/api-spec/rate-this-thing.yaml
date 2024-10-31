@@ -87,8 +87,52 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CategoryDTO' # Reference the Category schema
-
   # END OF CATEGORIES CONTROLLER
+
+  # START OF ITEMS CONTROLLER
+  /items:
+    get:
+      summary: Retrieve all items
+      operationId: getItems
+      tags:
+        - Item
+      responses:
+        '200':
+          description: An Item object
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ItemDTO'
+        '404':
+          description: Item not found
+
+  /items/{itemId}:
+    get:
+      summary: Retrieve an item by its Id
+      operationId: getItemById
+      tags:
+        - Item
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          description: The Id of the item
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: An Item object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ItemDTO'
+        '404':
+          description: Item not found
+
+  # END OF ITEMS CONTROLLER
 
 components:
   schemas:
@@ -97,6 +141,7 @@ components:
       properties:
         id:
           type: integer
+          format: int64
           example: 1
         username:
           type: string
@@ -126,8 +171,9 @@ components:
         message:
           type: string
           example: "User registered successfully."
-        user_id:
+        userId:
           type: integer
+          format: int64
           example: 1
 
     CategoryDTO:
@@ -135,11 +181,25 @@ components:
       properties:
         id:
           type: integer
+          format: int64
           example: 1
-        categoryName:
+        name:
           type: string
           enum:
             - MOVIES
             - BOOKS
             - OTHER
           example: MOVIES
+
+    ItemDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        categoryName:
+          type: string
